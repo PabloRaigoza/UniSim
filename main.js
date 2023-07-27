@@ -1,3 +1,6 @@
+let interface;
+let screen;
+
 const DisplayMode = {
     POP_UP : 0,
     RANK : 1,
@@ -36,14 +39,29 @@ class UI {
 
 class Screen {
     constructor() {
-        this.mode = DisplayMode.POP_UP;
-        this.popUps = [];
+        this.mode = DisplayMode.CAMPUS;
+        this.popUp = null;
     }
 
-    addPopUp(popUp) {this.popUps.push(popUp)}
+    pushPopUp(popUp, ui) {
+        if (this.popUp != null) {
+            console.error('Another pop already exists!');
+            return;
+        }
+        this.popUp = popUp;
+        this.mode = DisplayMode.POP_UP;
+        ui.addTab(this.popUp.btnMSg, 'pop-up', this.popUp.onClick, true);
+    
+        document.getElementById('pop-up').style.gridRow = '1';
+    }
 
     displayPopUp() {
-        
+        if (this.popUp == null) {
+            console.error('There is no pop-up to display!');
+            return;
+        }
+
+        this.popUp.draw();
     }
 
     displayRank() {
@@ -67,10 +85,12 @@ class Screen {
                 break;
         }
     }
+
+    displayMode(newMode) {
+        this.mode = newMode;
+    }
 }
 
-let interface;
-let screen;
 
 
 function setup() {
@@ -93,13 +113,26 @@ function setup() {
 function draw() {
     background(150);
     screen.drawScreen();
+    updateTime();
 }
 
 function startGame(id) {
-    screen.addPopUp()
+    screen.pushPopUp(PopUps.phdVolunteers, interface);
 
     interface.remove(id);
 }
+
+function updateTime() {
+    if (frameCount % 24 == 0) {
+        time.month++;
+        if (time.month > TIME.DEC) {
+            time.month = TIME.JAN;
+            time.year++;
+        }
+        console.log(time.year +', ' + time.month);
+    }
+}
+
 function viewRank() { }
 function viewCampus() { }
 function investRes() { }

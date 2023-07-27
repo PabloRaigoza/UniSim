@@ -1,21 +1,49 @@
 class PopUp {
-    constructor(_title, _msg, _img=null, onClick=()=>{}) {
+    constructor(_title, _msg, _btnMSg, _img=null, _onClick=()=>{}) {
         this.title = _title;
         this.msg = _msg;
+        this.btnMSg = _btnMSg;
         this.img = _img;
-        this.backgroundColor = new Color(255,200,0);
+        this.onClick = _onClick;
+        this.load = 0;
     }
-
+    
     draw() {
+        if (frameCount % 2 == 1 && this.load < 500) {this.load++;}
         rectMode(CENTER);
-        fill(this.backgroundColor);
+        fill(253,208,156);
         rect(width/2, height/2, width/2, height/2);
+
+        
+        stroke(0); fill(0);
+        strokeWeight(0);
+        textAlign(CENTER, TOP);
+
+        textFont('Courier New');
+        textSize(24);
+        textStyle(BOLD);
+        text(this.title, width/2, height/4 + 5);
+
+        textStyle(NORMAL);
+        textSize(16);
+        strokeWeight(0.5); fill(50);
+        text(this.msg.substring(0, this.load) , width/2, height/4 + 40, width/2);
     }
+}
+
+function phdVolunteersOnClick(id) {
+    interface.remove(id);
+    screen.displayMode(DisplayMode.CAMPUS);
+    screen.popUp = null;
+    uni.profCount = 10;
 }
 
 const PopUps = {
     phdVolunteers : new PopUp(
         'PhD Volunteers',
-        'Some new PhD graduates heard you were creating a '
+        'A small group of 5 PhD graduates heard you were creating a new insitition and decided to follow you. Nice!',
+        'Continue',
+        null,
+        phdVolunteersOnClick
     )
 }
