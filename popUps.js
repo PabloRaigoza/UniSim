@@ -32,18 +32,33 @@ class PopUp {
 }
 
 function phdVolunteersOnClick(id) {
-    interface.remove(id);
-    screen.displayMode(DisplayMode.CAMPUS);
-    screen.popUp = null;
     uni.profCount = 10;
+    uni.profQuality = 5;
+
+    screen.removePopUp(interface);
+    screen.pushPopUp(PopUps.newStudents, interface);
+}
+
+function newStudentsOnClick(id) {
+    uni.studCount = 100;
+    uni.studCount = 5;
+
+    screen.removePopUp(interface);
 }
 
 const PopUps = {
-    phdVolunteers : new PopUp(
+    phdVolunteers : new PopUp(   
         'PhD Volunteers',
         'A small group of 5 PhD graduates heard you were creating a new insitition and decided to follow you. Nice!',
         'Continue',
         null,
         phdVolunteersOnClick
+    ),
+    newStudents : new PopUp(
+        'Undergrad Students',
+        '100 students who were rejected from all the institutions they applied to last fall decided to enroll in ' + uni.name + ' for $30,000 a year!',
+        'Continue',
+        null,
+        newStudentsOnClick
     )
 }

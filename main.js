@@ -41,6 +41,8 @@ class Screen {
     constructor() {
         this.mode = DisplayMode.CAMPUS;
         this.popUp = null;
+        this.borderWidth = 20;
+        this.c = createGraphics(width-2*this.borderWidth, height-2*this.borderWidth)
     }
 
     pushPopUp(popUp, ui) {
@@ -53,6 +55,13 @@ class Screen {
         ui.addTab(this.popUp.btnMSg, 'pop-up', this.popUp.onClick, true);
     
         document.getElementById('pop-up').style.gridRow = '1';
+    }
+
+    removePopUp(ui) {
+        this.displayMode(DisplayMode.CAMPUS);
+
+        ui.remove('pop-up');
+        this.popUp = null;
     }
 
     displayPopUp() {
@@ -69,7 +78,24 @@ class Screen {
     }
 
     displayCampus() {
+        this.c.background(200);
 
+        this.c.noStroke();
+        this.c.rectMode(CENTER);
+        let bottom = 20;
+        this.c.fill(128);
+        this.c.rect(this.c.width/2, this.c.height-bottom, this.c.width, bottom*2);
+        
+        this.c.stroke(0);
+        this.c.fill(0);
+        this.c.textFont('Courier New');
+        this.c.textSize(14);
+        this.c.textAlign(LEFT, CENTER);
+        this.c.text('Endowment(10% ann.): '+toDollar(uni.endow), 5,this.c.height-bottom);
+
+
+
+        image(this.c,this.borderWidth,this.borderWidth);
     }
     
     drawScreen() {
@@ -94,7 +120,7 @@ class Screen {
 
 
 function setup() {
-    let wid = 0.9 * min(window.innerWidth, 1080);
+    let wid = 0.9 * min(window.innerWidth, 428);
     createCanvas(wid, 0.65 * wid);
 
     interface = new UI('grid-container');
@@ -124,12 +150,10 @@ function startGame(id) {
 
 function updateTime() {
     if (frameCount % 24 == 0) {
-        time.month++;
         if (time.month > TIME.DEC) {
-            time.month = TIME.JAN;
             time.year++;
         }
-        console.log(time.year +', ' + time.month);
+        time.month = (time.month + 1) % 12;
     }
 }
 

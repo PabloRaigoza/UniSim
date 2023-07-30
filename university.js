@@ -15,7 +15,7 @@ const TIME = {
 
 let time = {
     year : 2000,
-    month : TIME.JAN
+    month : TIME.AUG
 }
 
 
