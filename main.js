@@ -92,6 +92,7 @@ class Screen {
         this.c.textFont('Courier New');
         this.c.textSize(SM);
         this.c.textAlign(LEFT, CENTER);
+        this.c.textStyle(NORMAL);
         this.c.text('Endowment(10% ann.): '+toDollar(uni.endow), 5,this.c.height-bottom);
 
 
