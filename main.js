@@ -120,7 +120,7 @@ class Screen {
 
 
 function setup() {
-    let wid = 0.9 * min(window.innerWidth, 428);
+    let wid = 0.9 * min(window.innerWidth, 1080);
     createCanvas(wid, 0.65 * wid);
 
     interface = new UI('grid-container');
