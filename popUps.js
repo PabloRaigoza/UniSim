@@ -22,14 +22,15 @@ class PopUp {
         textAlign(CENTER, TOP);
 
         textFont('Courier New');
-        textSize(1.7*EM);
+        textSize(LG);
         textStyle(BOLD);
         text(this.title, width/2, height/4 + 5);
 
         textStyle(NORMAL);
-        textSize(1.2*EM);
+        textAlign(CENTER, CENTER);
+        textSize(SM);
         strokeWeight(0.5); fill(50);
-        text(this.msg.substring(0, this.load) , width/2, height/4 + 40, w);
+        text(this.msg.substring(0, this.load) , width/2, height/2, w);
     }
 }
 

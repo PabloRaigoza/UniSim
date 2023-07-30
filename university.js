@@ -27,7 +27,7 @@ class University {
         this.profCount = 5;
         this.profQuality = 5;
         this.money = 10000000;
-        this.endow = 100000;
+        this.endow = 90000;
     }
 
 

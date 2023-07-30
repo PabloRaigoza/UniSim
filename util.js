@@ -42,7 +42,10 @@ function getEmSize() {
     document.body.removeChild(tempElement);
   
     return emSize;
-  }
+}
   
-  const EM = getEmSize();
+const EM = getEmSize();
+
+let LG, SM;
+
   

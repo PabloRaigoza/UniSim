@@ -90,7 +90,7 @@ class Screen {
         this.c.stroke(0);
         this.c.fill(0);
         this.c.textFont('Courier New');
-        this.c.textSize(EM);
+        this.c.textSize(SM);
         this.c.textAlign(LEFT, CENTER);
         this.c.text('Endowment(10% ann.): '+toDollar(uni.endow), 5,this.c.height-bottom);
 
@@ -122,11 +122,13 @@ class Screen {
 
 function setup() {
     // let wid = 0.9 * min(window.innerWidth, 1080);
-    let wid = ((window.innerHeight < window.innerWidth) ? 0.5 : 0.9) * min(window.innerWidth, window.innerHeight);
+    let wid = ((window.innerHeight < window.innerWidth) ? 0.7 : 0.9) * min(window.innerWidth, window.innerHeight);
     console.log(window.innerHeight);
     console.log(window.innerWidth);
     createCanvas(wid, wid);
 
+    LG = 0.08*wid;
+    SM = 0.04*wid;
     interface = new UI('grid-container');
     interface.addTab('BEGIN!', 'begin-button', startGame, true);
     interface.addTab('View Rankings', 'view-rank', viewRank);
