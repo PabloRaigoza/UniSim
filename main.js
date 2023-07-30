@@ -89,7 +89,7 @@ class Screen {
         this.c.stroke(0);
         this.c.fill(0);
         this.c.textFont('Courier New');
-        this.c.textSize(14);
+        this.c.textSize(EM);
         this.c.textAlign(LEFT, CENTER);
         this.c.text('Endowment(10% ann.): '+toDollar(uni.endow), 5,this.c.height-bottom);
 
@@ -121,7 +121,7 @@ class Screen {
 
 function setup() {
     let wid = 0.9 * min(window.innerWidth, 1080);
-    createCanvas(wid, 0.65 * wid);
+    createCanvas(wid, wid);
 
     interface = new UI('grid-container');
     interface.addTab('BEGIN!', 'begin-button', startGame, true);

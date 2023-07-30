@@ -12,7 +12,9 @@ class PopUp {
         if (frameCount % 2 == 1 && this.load < 500) {this.load++;}
         rectMode(CENTER);
         fill(253,208,156);
-        rect(width/2, height/2, width/2, height/2);
+
+        let w = width*3/4;
+        rect(width/2, height/2, w, height/2);
 
         
         stroke(0); fill(0);
@@ -20,14 +22,14 @@ class PopUp {
         textAlign(CENTER, TOP);
 
         textFont('Courier New');
-        textSize(24);
+        textSize(1.7*EM);
         textStyle(BOLD);
         text(this.title, width/2, height/4 + 5);
 
         textStyle(NORMAL);
-        textSize(16);
+        textSize(1.2*EM);
         strokeWeight(0.5); fill(50);
-        text(this.msg.substring(0, this.load) , width/2, height/4 + 40, width/2);
+        text(this.msg.substring(0, this.load) , width/2, height/4 + 40, w);
     }
 }
 
