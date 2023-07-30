@@ -19,6 +19,8 @@
 			margin-bottom: 10px; */
 			/* margin-left: 10%;
 			margin-right: 10%; */
+			justify-content: center; /* Horizontally center the grid container */
+
 		}
         main {
             justify-content: center;
@@ -26,16 +28,26 @@
             align-items: center;
             flex-direction: column;
         }
+		#par-grid-container {
+			display: flex;
+			justify-content: center; /* Horizontally center the grid container */
+			height: 100%;
+		}
         #grid-container {
-            margin-top: 10px;
-            margin-bottom: 10px;
+			position: relative;
+			justify-content: center;
+			/* max-width: calc(100vh); */
             display: grid;
+			margin-top: 10px;
+            /* margin-bottom: 10px; */
             grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
         .tab, .double-tab {
-			margin: 0;
-			padding: 5px;
+			position: relative;
+
+			margin: 0px;
+			padding: 10px;
 			text-align: center;
 			font-size: 2em;
 			background-color:rgb(255, 200, 0);

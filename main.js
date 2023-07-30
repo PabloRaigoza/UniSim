@@ -12,7 +12,8 @@ class UI {
         this.id = _id;
         this.m = new Map();
 
-        this.container = createDiv().id(this.id);
+
+        this.container = (createDiv().id(this.id)).parent(createDiv().id('par-'+this.id));
     }
 
 
@@ -120,7 +121,10 @@ class Screen {
 
 
 function setup() {
-    let wid = 0.9 * min(window.innerWidth, 1080);
+    // let wid = 0.9 * min(window.innerWidth, 1080);
+    let wid = ((window.innerHeight < window.innerWidth) ? 0.5 : 0.9) * min(window.innerWidth, window.innerHeight);
+    console.log(window.innerHeight);
+    console.log(window.innerWidth);
     createCanvas(wid, wid);
 
     interface = new UI('grid-container');
