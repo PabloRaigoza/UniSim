@@ -10,27 +10,30 @@ class PopUp {
     
     draw() {
         if (frameCount % 2 == 1 && this.load < 500) {this.load++;}
-        rectMode(CENTER);
-        fill(253,208,156);
-
         let w = width*3/4;
-        rect(width/2, height/2, w, height/2);
+        let g = createGraphics(w, w);
+        g.rectMode(CENTER);
+        // g.
+        g.background(253,208,156);
+        // g.rect(width/2, height/2, w, w);
 
         
-        stroke(0); fill(0);
-        strokeWeight(0);
-        textAlign(CENTER, TOP);
+        g.stroke(0); fill(0);
+        g.strokeWeight(0);
+        g.textAlign(CENTER, TOP);
 
-        textFont('Courier New');
-        textSize(LG);
-        textStyle(BOLD);
-        text(this.title, width/2, height/4 + 5);
+        g.textFont('Courier New');
+        g.textSize(LG);
+        g.textStyle(BOLD);
+        g.text(this.title, w/2, 5, w);
 
-        textStyle(NORMAL);
-        textAlign(CENTER, CENTER);
-        textSize(SM);
-        strokeWeight(0.5); fill(50);
-        text(this.msg.substring(0, this.load) , width/2, height/2, w);
+        g.textStyle(NORMAL);
+        g.textAlign(CENTER, CENTER);
+        g.textSize(SM);
+        g.strokeWeight(0.5); fill(50);
+        g.text(this.msg.substring(0, this.load) , w/2, w/2, w);
+    
+        return g;
     }
 }
 

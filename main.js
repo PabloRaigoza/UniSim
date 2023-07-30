@@ -71,7 +71,8 @@ class Screen {
             return;
         }
 
-        this.popUp.draw();
+        imageMode(CENTER);
+        image(this.popUp.draw(), width/2, height/2);
     }
 
     displayRank() {
@@ -83,7 +84,7 @@ class Screen {
 
         this.c.noStroke();
         this.c.rectMode(CENTER);
-        let bottom = 20;
+        let bottom = 0.05*width;
         this.c.fill(128);
         this.c.rect(this.c.width/2, this.c.height-bottom, this.c.width, bottom*2);
         
@@ -93,11 +94,13 @@ class Screen {
         this.c.textSize(SM);
         this.c.textAlign(LEFT, CENTER);
         this.c.textStyle(NORMAL);
+        strokeWeight(0.5); fill(50);
         this.c.text('Endowment(10% ann.): '+toDollar(uni.endow), 5,this.c.height-bottom);
 
 
 
-        image(this.c,this.borderWidth,this.borderWidth);
+        imageMode(CENTER);
+        image(this.c,width/2,height/2);
     }
     
     drawScreen() {
