@@ -15,7 +15,7 @@ const TIME = {
 
 let time = {
     year : 2000,
-    month : TIME.AUG
+    month : TIME.MAR
 }
 
 
@@ -35,12 +35,14 @@ function timeMonth() {
     else return '';
 }
 
-function newJan() {
-    uni.setResQuality(uni.resQuaity + uni.profCount*uni.profCount);
+function updateCosts() {
+    uni.setResQuality(uni.resQuaity + uni.profCount*uni.profQuality);
     uni.setMoney(uni.money - uni.profCount*PROF_SAL);
+
+    console.log(uni.resQuaity);
 }
 
-function newMar() {
+function marchMadness() {
     let i = 0;
     for (; i < 7; i++) {
         if (random() < uni.sportsQuality / 100) {
@@ -50,7 +52,6 @@ function newMar() {
         }
     }
     
-    // console.log(i);
     let placing = '1st! ' + uni.name + ' has percervered through thick and thin to win it all!';
     if (i > 0) {
         if (i == 1) placing = '64th. There is no trophy for last place';
@@ -62,34 +63,34 @@ function newMar() {
         
         let initMsg = uni.name + ' qualified for March Madness and placed ' + placing;
         PopUps.marchMadness.msg = initMsg;
-        // screen.pushPopUp(PopUps.marchMadness, interface);
+        if (ENABLE_POPUPS) screen.pushPopUp(PopUps.marchMadness, interface);
     }
 }
 
-function newApr() {
+function admissions() {
     let skillAvg = ((MAX_TUITION - uni.tuition)/1000) + uni.resQuaity + (uni.profQuality * 10) + uni.sportsQuality;
     skillAvg /= 400;
     // console.log(skillAvg);
     
     
-    let iq = map(skillAvg, 0, 1, 90, 170);
+    uni.iq = map(skillAvg, 0, 1, MIN_IQ, MAX_IQ);
     // let newStud = map(skillAvg, 0, 1, 0.5, 1)/4;
     
     uni.studCount += uni.profCount*4;
-    // console.log(iq);
+
+    PopUps.admissions.msg = uni.profCount*4 + ' students enrolled, with a IQ mean of ' + uni.iq + '. Acceptance rate is ' +  (1-skillAvg).toString().substring(0,5) + '%.';
+    if (ENABLE_POPUPS) screen.pushPopUp(PopUps.admissions, interface);
 }
 
-function newMay() {
+function graduation() {
     uni.studCount -= uni.studCount/4;
-    // uni.studCount -= uni.profCount*4;
 }
 
-function newJul() {
+function endowmentInterest() {
     uni.setMoney(uni.money+uni.endow*0.05);
     uni.endow*=1.05;
 }
 
-function newAug() {
+function chargeTuition() {
     uni.setMoney(uni.money + uni.tuition*uni.studCount);
-    // console.log('+'+uni.tuition*uni.studCount)
 }

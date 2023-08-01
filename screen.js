@@ -42,7 +42,6 @@ class UI {
         // let a = this.m.get(id).remove();
         // document.getElementById(id).parentNode.remo;
         let p = document.getElementById(id).parentElement.parentElement;
-        console.log(p)
         p.removeChild(document.getElementById(id).parentElement);
     }
 }

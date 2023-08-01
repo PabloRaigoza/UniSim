@@ -13,8 +13,10 @@ class University {
         this.endow = 10000000;
         this.tuition = 30000;
         this.sports_cost = INIT_SPORTS_COST;
-        this.prof_cost = INIT_PROF_COST;
+        this.prof_bonus_cost = INIT_BONUS_PROF_COST;
         this.invest_res_cost = INIT_INVEST_RES_COST;
+        this.hire_prof_cost = INIT_HIRE_PROF_COST;
+        this.iq = 100;
     }
 
     setMoney(m) {
@@ -34,13 +36,28 @@ class University {
         this.profQuality = min(100, m);
     }
     
-    setSportsCost(m) {
-        this.sports_cost = m;
-        document.getElementById('invest-sport').childNodes[1].textContent = toDollar(m);
+    changePrice(id, amt) {
+        document.getElementById(id).childNodes[1].textContent = toDollar(amt);
     }
 
-    setInvestResCost() {
+    setSportsCost(m) {
+        this.sports_cost = m;
+        this.changePrice('invest-sport', m);
+    }
+
+    setInvestResCost(m) {
         this.invest_res_cost = m;
+        this.changePrice('invest-research', m);
+    }
+
+    setProfBonus(m) {
+        this.prof_bonus_cost = m;
+        this.changePrice('prof-bonus', m);
+    }
+
+    setHireProfCost(m) {
+        this.hire_prof_cost = m;
+        this.changePrice('hire-prof', m)
     }
 }
 

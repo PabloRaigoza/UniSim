@@ -8,16 +8,18 @@ function setup() {
     interface = new UI('grid-container');
     screen = new Screen();
 
-    interface.addTab('BEGIN!', 'begin-button', startGame, true);
+    // interface.addTab('BEGIN!', 'begin-button', startGame, true);
     interface.addTab('View Rankings', 'view-rank', viewRank);
     interface.addTab('View Campus', 'view-campus', viewCampus);
     interface.addTab('Lower Tuition', 'lower-tuition', lowerTuition, false, toDollar(LOWER_TUITION));
     interface.addTab('Raise Tuition', 'raise-tuition', raiseTuition, false, toDollar(RAISE_TUITION));
     interface.addTab('Invest in Research', 'invest-research', investRes, false, toDollar(INIT_INVEST_RES_COST));
-    interface.addTab('Professor Bonus', 'prof-bonus', profBonus, false, toDollar(INIT_PROF_COST));
+    interface.addTab('Professor Bonus', 'prof-bonus', profBonus, false, toDollar(INIT_BONUS_PROF_COST));
     interface.addTab('Renovate Stadium', 'invest-sport', investSport, false, toDollar(INIT_SPORTS_COST));
+    interface.addTab('Hire Professors (+5)', 'hire-prof', hireProf, false, toDollar(INIT_HIRE_PROF_COST));
     interface.addTab('Buy Graduate Program', 'buy-grad', buyGrad, false, toDollar(GRAD_COST));
 
+    if(ENABLE_POPUPS) screen.pushPopUp(PopUps.startGame, interface);    
 }
 
 function draw() {
@@ -26,20 +28,12 @@ function draw() {
     updateTime();
 }
 
-function startGame(id) {
-    screen.pushPopUp(PopUps.phdVolunteers, interface);
-
-    interface.remove(id);
-}
-
 function setPixel(x, y, c) {
     noStroke();
     fill(c);
     rectMode(CENTER);
     rect(x*px+px/2, y*px+px/2, px+0.4, px+0.4);
 }
-
-// function pixelRect(x, y,)
 
 function updateTime() {
     if (frameCount % 6 == 0 && screen.popUp == null) {
@@ -50,12 +44,12 @@ function updateTime() {
             time.month = TIME.JAN;
         }
 
-        if (time.month == TIME.JAN) newJan();
-        else if (time.month == TIME.MAR) newMar();
-        else if (time.month == TIME.APR) newApr();
-        else if (time.month == TIME.MAY) newMay();
-        else if (time.month == TIME.JUL) newJul();
-        else if (time.month == TIME.AUG) newAug();
+        if (time.month == TIME.JAN) updateCosts();
+        else if (time.month == TIME.MAR) marchMadness();
+        else if (time.month == TIME.APR) admissions();
+        else if (time.month == TIME.MAY) graduation();
+        else if (time.month == TIME.JUL) endowmentInterest();
+        else if (time.month == TIME.AUG) chargeTuition();
     }
 }
 
@@ -68,6 +62,13 @@ function raiseTuition() {
 
 function viewRank() { }
 function viewCampus() { }
+function hireProf() {
+    if(uni.money > uni.hire_prof_cost) {
+        uni.profCount+=5;
+        uni.setMoney(uni.money - uni.hire_prof_cost);
+        uni.setHireProfCost(uni.hire_prof_cost*1.2);
+    }
+}
 function investRes() {
     if (uni.money > uni.invest_res_cost) {
         uni.setResQuality(uni.resQuaity + 1);
@@ -76,10 +77,10 @@ function investRes() {
     }
 }
 function profBonus() {
-    if (uni.money > uni.prof_cost) {
+    if (uni.money > uni.prof_bonus_cost) {
         uni.setSportsQuality(uni.profQuality + 0.5);
-        uni.setMoney(uni.money - uni.prof_cost);
-        uni.setProfCost(uni.prof_cost*1.1);
+        uni.setMoney(uni.money - uni.prof_bonus_cost);
+        uni.setProfBonus(uni.prof_bonus_cost*1.1);
     }
 }
 function investSport() {
