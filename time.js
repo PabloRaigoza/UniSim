@@ -18,6 +18,7 @@ let time = {
     month : TIME.AUG
 }
 
+
 function timeMonth() {
     if (time.month == TIME.JAN) return 'Jan';
     else if (time.month == TIME.FEB) return 'Feb';
@@ -34,9 +35,9 @@ function timeMonth() {
     else return '';
 }
 
-function newJul() {
-    uni.endow*=1.1;
-    uni.setMoney(uni.money*1.05);
+function newJan() {
+    uni.setResQuality(uni.resQuaity + uni.profCount*uni.profCount);
+    uni.setMoney(uni.money - uni.profCount*PROF_SAL);
 }
 
 function newMar() {
@@ -48,7 +49,7 @@ function newMar() {
             break;
         }
     }
-
+    
     // console.log(i);
     let placing = '1st! ' + uni.name + ' has percervered through thick and thin to win it all!';
     if (i > 0) {
@@ -58,7 +59,7 @@ function newMar() {
         if (i == 4) placing = '8th, making it to the quarter finals!';
         if (i == 5) placing = '4th, making it to the semi-finals year!';
         if (i == 6) placing = '2nd. Second place is just the first place loser!';
-
+        
         let initMsg = uni.name + ' qualified for March Madness and placed ' + placing;
         PopUps.marchMadness.msg = initMsg;
         // screen.pushPopUp(PopUps.marchMadness, interface);
@@ -68,5 +69,27 @@ function newMar() {
 function newApr() {
     let skillAvg = ((MAX_TUITION - uni.tuition)/1000) + uni.resQuaity + (uni.profQuality * 10) + uni.sportsQuality;
     skillAvg /= 400;
-    console.log(skillAvg);
+    // console.log(skillAvg);
+    
+    
+    let iq = map(skillAvg, 0, 1, 90, 170);
+    // let newStud = map(skillAvg, 0, 1, 0.5, 1)/4;
+    
+    uni.studCount += uni.profCount*4;
+    // console.log(iq);
+}
+
+function newMay() {
+    uni.studCount -= uni.studCount/4;
+    // uni.studCount -= uni.profCount*4;
+}
+
+function newJul() {
+    uni.setMoney(uni.money+uni.endow*0.05);
+    uni.endow*=1.05;
+}
+
+function newAug() {
+    uni.setMoney(uni.money + uni.tuition*uni.studCount);
+    // console.log('+'+uni.tuition*uni.studCount)
 }

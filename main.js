@@ -11,13 +11,12 @@ function setup() {
     interface.addTab('BEGIN!', 'begin-button', startGame, true);
     interface.addTab('View Rankings', 'view-rank', viewRank);
     interface.addTab('View Campus', 'view-campus', viewCampus);
-    interface.addTab('Invest in Research', 'invest-research', investRes);
-    interface.addTab('Invest in Endowment', 'invest-endowment', investDow);
-    interface.addTab('Professor Bonus', 'prof-bonus', profBonus);
-    interface.addTab('Renovate Stadium', 'invest-sport', investSport);
-    interface.addTab('Raise Tuition', 'raise-tuition', raiseTuition);
-    interface.addTab('Lower Tuition', 'lower-tuition', lowerTuition);
-    interface.addTab('Buy Graduate Program', 'buy-grad', buyGrad);
+    interface.addTab('Lower Tuition', 'lower-tuition', lowerTuition, false, toDollar(LOWER_TUITION));
+    interface.addTab('Raise Tuition', 'raise-tuition', raiseTuition, false, toDollar(RAISE_TUITION));
+    interface.addTab('Invest in Research', 'invest-research', investRes, false, toDollar(INIT_INVEST_RES_COST));
+    interface.addTab('Professor Bonus', 'prof-bonus', profBonus, false, toDollar(INIT_PROF_COST));
+    interface.addTab('Renovate Stadium', 'invest-sport', investSport, false, toDollar(INIT_SPORTS_COST));
+    interface.addTab('Buy Graduate Program', 'buy-grad', buyGrad, false, toDollar(GRAD_COST));
 
 }
 
@@ -51,9 +50,12 @@ function updateTime() {
             time.month = TIME.JAN;
         }
 
-        if (time.month == TIME.JUL) newJul();
-        if (time.month == TIME.MAR) newMar();
-        if (time.month == TIME.APR) newApr();
+        if (time.month == TIME.JAN) newJan();
+        else if (time.month == TIME.MAR) newMar();
+        else if (time.month == TIME.APR) newApr();
+        else if (time.month == TIME.MAY) newMay();
+        else if (time.month == TIME.JUL) newJul();
+        else if (time.month == TIME.AUG) newAug();
     }
 }
 
@@ -66,9 +68,32 @@ function raiseTuition() {
 
 function viewRank() { }
 function viewCampus() { }
-function investRes() { }
-function investDow() { }
-function profBonus() { }
-function investSport() { }
-function buyGrad() { }
+function investRes() {
+    if (uni.money > uni.invest_res_cost) {
+        uni.setResQuality(uni.resQuaity + 1);
+        uni.setMoney(uni.money - uni.invest_res_cost);
+        uni.setInvestResCost(uni.invest_res_cost*1.2);
+    }
+}
+function profBonus() {
+    if (uni.money > uni.prof_cost) {
+        uni.setSportsQuality(uni.profQuality + 0.5);
+        uni.setMoney(uni.money - uni.prof_cost);
+        uni.setProfCost(uni.prof_cost*1.1);
+    }
+}
+function investSport() {
+    if (uni.money > uni.sports_cost) {
+        uni.setSportsQuality(uni.sportsQuality + 5);
+        uni.setMoney(uni.money - uni.sports_cost);
+        uni.setSportsCost(uni.sports_cost*1.2);
+    }
+}
+function buyGrad(id) {
+    if (uni.money > GRAD_COST) {
+        uni.setResQuality(uni.resQuaity + 50);
+        uni.setMoney(uni.money-GRAD_COST);
+    }
+    interface.remove(id);
+}
 

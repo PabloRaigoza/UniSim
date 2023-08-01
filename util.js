@@ -43,10 +43,17 @@ function getEmSize() {
   
     return emSize;
 }
-  
+
 const EM = getEmSize();
 
 let LG, SM;
 let px;
 
 const MAX_TUITION = 100000;
+const GRAD_COST = 1000000000; // 1 bill
+const PROF_SAL = 100000; // 100k
+const INIT_SPORTS_COST = 10000000; // 10m
+const INIT_PROF_COST = 500000; // 500k
+const INIT_INVEST_RES_COST = 300000; // 300k
+const RAISE_TUITION = 5000; // 5k
+const LOWER_TUITION = 5000; // 5k

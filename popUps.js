@@ -43,8 +43,7 @@ class PopUp {
 }
 
 function phdVolunteersOnClick(id) {
-    uni.profCount = 10;
-    uni.profQuality = 5;
+    uni.profCount = 5;
 
     screen.removePopUp(interface);
     screen.pushPopUp(PopUps.newStudents, interface);

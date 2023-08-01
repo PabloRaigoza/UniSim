@@ -20,23 +20,30 @@ class UI {
 
 
     /**
-     * 
+     * Creates a new tab
      * @param {*} text text to be displayed
      * @param {*} id id of the tab created
      * @param {*} event event function to be called when pressed
      * @param {*} isDouble whether or not the tab spans two columns
      */
-    addTab(text, id, event = () => { }, isDouble = false) {
-        let p = createP(text);
-        p.class(isDouble ? 'double-tab' : 'tab').id(id);
-        p.parent(this.container);
+    addTab(text, id, event = () => { }, isDouble = false, caption='') {
+        let par_p = createDiv().class(isDouble ? 'double-tab' : 'tab');
+        let p = createP(text).parent(par_p).id(id);
+        let bottom = createDiv(caption).parent(p);
+        p.parent(par_p);
+        par_p.parent(this.container);
+        // p.parent(this.container);
         p.mousePressed(()=>event(id));
 
         this.m.set(id, p);
     }
 
     remove(id) {
-        let a = this.m.get(id).remove();
+        // let a = this.m.get(id).remove();
+        // document.getElementById(id).parentNode.remo;
+        let p = document.getElementById(id).parentElement.parentElement;
+        console.log(p)
+        p.removeChild(document.getElementById(id).parentElement);
     }
 }
 
@@ -58,7 +65,8 @@ class Screen {
         this.mode = DisplayMode.POP_UP;
         ui.addTab(this.popUp.btnMSg, 'pop-up', this.popUp.onClick, true);
     
-        document.getElementById('pop-up').style.gridRow = '1';
+        // console.log(document.getElementById('pop-up'))
+        document.getElementById('pop-up').parentElement.style.gridRow = '2';
     }
 
     removePopUp(ui) {
@@ -75,7 +83,9 @@ class Screen {
         }
 
         imageMode(CENTER);
-        image(this.popUp.draw(), width/2, height/2);
+        let a = this.popUp.draw();
+        image(a, width/2, height/2);
+        a.remove();
     }
 
     displayRank() {
@@ -157,7 +167,7 @@ class Screen {
         this.c.textSize(SM);
         this.c.textAlign(RIGHT, CENTER)
         // this.c.text('P:'+uni.profCount + ' S:' + uni.studCount, (90)*px,4*px);
-        this.c.text('P:'+uni.profCount + ' S:' + uni.studCount, (99-2*this.borderWidth/px)*px,4*px);
+        this.c.text('P:'+ floor(uni.profCount) + ' S:' + floor(uni.studCount), (99-2*this.borderWidth/px)*px,4*px);
 
         // imageMode(CENTER);
         // image(this.c,width/2,height/2);
