@@ -49,4 +49,4 @@ const EM = getEmSize();
 let LG, SM;
 let px;
 
-  
+const MAX_TUITION = 100000;

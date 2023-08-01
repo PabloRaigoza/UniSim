@@ -15,10 +15,15 @@ class PopUp {
         g.rectMode(CENTER);
         // g.
         g.background(253,208,156);
-        // g.rect(width/2, height/2, w, w);
+
+        g.rectMode(CENTER);
+        g.noFill(); g.strokeWeight(2*px); g.stroke(1);
+        g.rect(g.width/2, g.height/2, w, w);
+        
+
 
         
-        g.stroke(0); fill(0);
+        g.stroke(0); g.fill(0);
         g.strokeWeight(0);
         g.textAlign(CENTER, TOP);
 
@@ -52,6 +57,10 @@ function newStudentsOnClick(id) {
     screen.removePopUp(interface);
 }
 
+function marchMadnessOnClick(id) {
+    screen.removePopUp(interface);
+}
+
 const PopUps = {
     phdVolunteers : new PopUp(   
         'PhD Volunteers',
@@ -66,5 +75,12 @@ const PopUps = {
         'Continue',
         null,
         newStudentsOnClick
+    ),
+    marchMadness : new PopUp(
+        'March Madness!',
+        '',
+        'Go ' + uni.name + '!',
+        null,
+        marchMadnessOnClick
     )
 }
