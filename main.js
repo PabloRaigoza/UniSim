@@ -36,8 +36,8 @@ function setPixel(x, y, c) {
 }
 
 function updateTime() {
-    if (frameCount % 6 == 0 && screen.popUp == null) {
-    // if (frameCount % 60 == 0 && screen.popUp == null) {
+    // if (frameCount % 6 == 0 && screen.popUp == null) {
+    if (frameCount % 60 == 0 && screen.popUp == null) {
         time.month++;
         if (time.month > TIME.DEC) {
             time.year++;
