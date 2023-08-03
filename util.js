@@ -59,6 +59,6 @@ const INIT_INVEST_RES_COST = 300000; // 300k
 const RAISE_TUITION = 5000; // 5k
 const LOWER_TUITION = 5000; // 5k
 
-const ENABLE_POPUPS = false;
+const ENABLE_POPUPS = true;
 const MIN_IQ = 40;
 const MAX_IQ = 160;
