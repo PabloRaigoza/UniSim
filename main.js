@@ -94,7 +94,7 @@ function buyGrad(id) {
     if (uni.money > GRAD_COST) {
         uni.setResQuality(uni.resQuaity + 50);
         uni.setMoney(uni.money-GRAD_COST);
+        interface.remove(id);
     }
-    interface.remove(id);
 }
 

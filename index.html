@@ -10,36 +10,51 @@
 		body {
 			font-family: '04b_03', monospace;
 			font-weight: bolder;
+			display: flex;
 			/* font-family: '8BIT WONDER', sans-serif; */
 			/* text-shadow: 2px 2px 0 #000, 3px 3px 0 #000, 4px 4px 0 #000; */
 			/* font-family: 'Courier New', monospace; */
 			
 			padding: 0px;
+			margin: 0px;
 			/* margin-top: 10px;
 			margin-bottom: 10px; */
 			/* margin-left: 10%;
 			margin-right: 10%; */
-			justify-content: center; /* Horizontally center the grid container */
+			justify-content: center;
+			align-items: center;
 
 		}
         main {
+			flex: 1;
             justify-content: center;
             display: flex;
             align-items: center;
             flex-direction: column;
+			height:max-content;
+			/* margin-right: 50px;
+			margin-left: 50px; */
+			/* width: fit-content;
+			height: fit-content; */
         }
 		#par-grid-container {
+			/* flex: 2; */
 			display: flex;
-			justify-content: center; /* Horizontally center the grid container */
-			height: 100%;
+			justify-content: center;
+			margin-left: 10px;
+			margin-right: 10px;
+			flex-direction: column;
+			/* align-items: center; */
+			/* height: 100%; */
 		}
         #grid-container {
-			position: relative;
+			/* position: relative; */
 			justify-content: center;
 			/* max-width: calc(100vh); */
             display: grid;
 			margin-top: 10px;
             /* margin-bottom: 10px; */
+			align-items: center;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
@@ -84,6 +99,12 @@
 		#uni-money:hover {
 			cursor: default;
 		}
+
+		@media (max-width:768px) {
+			body {
+				flex-direction: column;
+			}
+		}
 		
     </style>
 
@@ -97,5 +118,6 @@
         <script src="screen.js"></script>
         <script src="main.js"></script>
     </div>
+
   </body>
 </html>
